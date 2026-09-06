@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DaVINCI Field Manual — Cosplay Build Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #F4F1E8;
+    --ink-dim: #ABA79C;
+    --panel: #232220;
+    --panel-2: #2C2A27;
+    --bg: #171614;
+    --line: #3A3833;
+    --orange: #E8630D;
+    --orange-dim: #7A3A15;
+    --ok: #6FA96A;
+    --warn: #D64545;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.01em; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  header.top {
+    padding: 22px 18px 16px;
+    border-bottom: 3px solid var(--orange);
+    background:
+      repeating-linear-gradient(135deg, rgba(232,99,13,0.06) 0 8px, transparent 8px 16px),
+      var(--panel);
+  }
+  header.top h1 {
+    margin: 0;
+    font-size: 28px;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  header.top h1 span { color: var(--orange); }
+  header.top p {
+    margin: 6px 0 0;
+    color: var(--ink-dim);
+    font-size: 14px;
+    max-width: 46ch;
+  }
+
+  nav.chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  nav.chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink-dim);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .chip[data-active="true"] {
+    border-color: var(--orange);
+    color: var(--ink);
+    background: var(--orange-dim);
+  }
+  .chip .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 7px;
+    background: var(--ink-dim);
+  }
+  .chip[data-done="true"] .dot { background: var(--ok); }
+
+  main {
+    padding: 20px 16px 60px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--orange);
+    border: 1px solid var(--orange-dim);
+    padding: 2px 8px;
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  h2.title {
+    font-size: 34px;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+  }
+  .tagline { color: var(--ink-dim); margin: 0 0 20px; font-size: 15px; }
+
+  section.block {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  section.block h3 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-dim);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  section.block.safety { border-left: 3px solid var(--warn); }
+  section.block.safety h3 { color: var(--warn); }
+  section.block ul { margin: 0; padding-left: 18px; }
+  section.block li { margin-bottom: 7px; font-size: 14.5px; }
+  section.block li:last-child { margin-bottom: 0; }
+
+  .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .setting {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+  }
+  .setting .k { font-size: 11px; color: var(--ink-dim); text-transform: uppercase; }
+  .setting .v { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--orange); }
+  .settings-note { font-size: 12.5px; color: var(--ink-dim); margin-top: 10px; font-style: italic; }
+
+  .project {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .project-head {
+    padding: 12px 14px;
+    background: var(--panel-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .project-head h4 {
+    margin: 0;
+    font-size: 17px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .project-body { padding: 14px; }
+  .materials {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .materials b { color: var(--ink); font-weight: 500; }
+
+  .step {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .step:last-child { margin-bottom: 0; }
+  .step input[type="checkbox"] {
+    margin-top: 3px;
+    width: 17px; height: 17px;
+    accent-color: var(--orange);
+    flex-shrink: 0;
+  }
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--orange);
+    font-size: 12px;
+    flex-shrink: 0;
+    width: 18px;
+    padding-top: 2px;
+  }
+  .step-text { flex: 1; }
+  .step-text .st-title { font-weight: 600; font-size: 14.5px; }
+  .step-text .st-detail { font-size: 14px; color: var(--ink-dim); margin-top: 2px; }
+  .step.checked .st-title, .step.checked .st-detail { text-decoration: line-through; opacity: 0.55; }
+
+  .tip {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(232,99,13,0.08);
+    border-left: 3px solid var(--orange);
+    font-size: 13.5px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .tip b { color: var(--orange); }
+
+  .placeholder {
+    padding: 30px 16px;
+    text-align: center;
+    color: var(--ink-dim);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    font-size: 14px;
+  }
+  .placeholder b { color: var(--ink); display: block; margin-bottom: 4px; }
+
+  textarea.notes {
+    width: 100%;
+    min-height: 70px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13.5px;
+    padding: 10px;
+    resize: vertical;
+  }
+  .save-state {
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 6px;
+    height: 14px;
+  }
+
+  .progress-bar {
+    height: 5px;
+    background: var(--panel-2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--orange);
+    transition: width 0.3s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin: -12px 0 18px;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1 class="display">DaVINCI <span>Field Manual</span></h1>
+  <p>Ultimate kit reference &amp; build log — Richard's cosplay track</p>
+</header>
+
+<nav class="chips" id="chipNav"></nav>
+
+<main id="main"></main>
+
+<script>
+const DATA = {
+  modules: [
+    {
+      id: "safety",
+      name: "Safety & Setup",
+      category: "ORIENTATION",
+      tagline: "Read this once before any module. Comes back to it isn't optional.",
+      safety: [
+        "Eye protection every time a bit or blade spins — plastic and foam throw chips just like wood does.",
+        "Dust mask or respirator for sanding, routing, and foam-cutting sessions. Foam and resin dust adds up over years, not just one afternoon.",
+        "No gloves near spinning bits or blades — a glove that catches pulls your hand in rather than protecting it.",
+        "Clamp or weight the base platform down. A toolbox-sized tool has less mass than a full-size one, so it walks if the work isn't secured.",
+        "Confirm each module is fully seated and clicked onto the Leonardo GRIP base before power-on. A half-seated head is the most common cause of binding or kickback on compact multi-tools.",
+        "Dry-run every module unloaded the first time you mount it, so you know what normal sound and vibration feel like before there's material in the way."
+      ],
+      settings: [],
+      projects: [],
+      note: "materialGuide"
+    },
+    {
+      id: "bench-saw",
+      name: "Bench Saw",
+      category: "CUTTING",
+      tagline: "Straight, repeatable cuts on sheet stock — your starting point for any panel or plate.",
+      safety: [
+        "Push stick or scrap pusher for any cut where fingers would end up within 3 inches of the blade.",
+        "Never cut freehand — always ride the fence or a straightedge guide.",
+        "Let the blade reach full speed before feeding material in."
+      ],
+      settings: [
+        { k: "EVA foam (2–10mm)", v: "Slow feed, fine-tooth blade" },
+        { k: "Thin plywood (≤6mm)", v: "Med speed, cross-cut blade" },
+        { k: "Acrylic / PETG sheet", v: "Slow speed, fine-tooth, light feed" }
+      ],
+      settingsNote: "Starting points only — confirm against your manual's blade/speed chart before cutting anything you care about.",
+      projects: [
+        {
+          title: "Visor Blank & Chest Plate Backer",
+          materials: "Clear PETG or acrylic sheet · thin plywood or Sintra for the backer · fence guide",
+          steps: [
+            { t: "Mark your cut lines", d: "Use a paper or cardboard template transferred from your pattern — pencil directly on the protective film if the sheet still has one." },
+            { t: "Set the fence", d: "Measure twice from the blade to the fence at both front and back to confirm it's parallel." },
+            { t: "Make a test cut in scrap first", d: "Same material, same thickness — confirms blade choice and feed speed before you touch the real sheet." },
+            { t: "Cut the visor blank", d: "Slow, steady feed. Let the blade do the work — pushing acrylic too fast is how it cracks or chips instead of shearing clean." },
+            { t: "Cut the backer panel", d: "Switch blades if you're moving from acrylic to plywood — don't run a plastic-rated blade through wood." }
+          ],
+          tip: "Leave the protective film on the acrylic until every cutting, drilling, and routing step is done — it saves the surface from scratches during handling."
+        }
+      ]
+    },
+    {
+      id: "drill-press",
+      name: "Drill Press",
+      category: "DRILLING",
+      tagline: "Precise, perpendicular holes — rivets, LED wiring, articulation pins.",
+      safety: [
+        "Clamp the workpiece to the table — small parts spin violently if a bit catches without one.",
+        "Back thin or brittle material (acrylic, thin plywood) with a sacrificial scrap underneath to prevent blowout on exit."
+      ],
+      settings: [
+        { k: "Plastic / acrylic", v: "Low–med speed, peck drilling" },
+        { k: "Thin plywood", v: "Med speed, steady feed" },
+        { k: "LED wire holes (3–5mm)", v: "Low speed, light pressure" }
+      ],
+      settingsNote: "Peck drilling means drill a bit, retract, drill again — keeps plastic from melting around the bit.",
+      projects: [
+        {
+          title: "Pauldron Rivet & LED Wiring Holes",
+          materials: "Armor panel (foam-backed plastic or plywood) · rivets sized to your hole · LEDs + wire if lighting the piece",
+          steps: [
+            { t: "Mark hole centers", d: "Use a center punch or a pilot dent with an awl so the bit doesn't wander on the first touch." },
+            { t: "Clamp with backer scrap underneath", d: "Position so the bit will exit into the sacrificial piece, not your work surface." },
+            { t: "Drill rivet holes first", d: "Peck-drill through in short plunges, clearing chips between each." },
+            { t: "Drill LED holes last", d: "Smaller bit, lighter pressure — these holes are cosmetic-critical, so a clean entry matters more than speed." },
+            { t: "Test-fit rivets and LEDs", d: "Before final assembly, dry-fit everything to confirm alignment across mating panels." }
+          ],
+          tip: "Drill LED holes very slightly undersized and press-fit the LED — it holds without glue and stays serviceable if a bulb dies later."
+        }
+      ]
+    },
+    {
+      id: "router",
+      name: "Router",
+      category: "SHAPING",
+      tagline: "Edge bevels, wire channels, and panel-line detail.",
+      safety: [
+        "Always feed against the direction of bit rotation — feeding with rotation causes the router to grab and run.",
+        "Secure the workpiece fully; a router's cutting force is sideways, not just down, so clamps need to resist that pull."
+      ],
+      settings: [
+        { k: "Foam-backed plastic bevel", v: "Med speed, shallow passes" },
+        { k: "Plywood edge profile", v: "Med-high speed" },
+        { k: "Wire channel groove", v: "Low-med speed, multiple shallow passes" }
+      ],
+      settingsNote: "Multiple shallow passes beat one deep pass — less tear-out, less chance of the bit wandering off your line.",
+      projects: [
+        {
+          title: "Beveled Armor Edge + Hidden Wire Channel",
+          materials: "Plywood or Sintra base panel · straight bit for the channel · roundover or chamfer bit for the edge",
+          steps: [
+            { t: "Draw the channel path", d: "Pencil the wire route on the back face before cutting — plan the path to avoid any spot that will later be drilled or riveted." },
+            { t: "Rout the channel in shallow passes", d: "Set depth to about a third of final depth per pass, repeat until the wire sits flush." },
+            { t: "Flip the panel and bevel the front edge", d: "Clamp securely; feed slowly around any curved sections." },
+            { t: "Test-fit the wire", d: "Press it into the channel before final glue-up — confirm it doesn't bulge above the surface." }
+          ],
+          tip: "Round over sharp routed edges with a pass of the sander afterward — a machine-cut edge under paint will always look sharper than a hand-finished one unless you knock it back."
+        }
+      ]
+    },
+    {
+      id: "lathe",
+      name: "Lathe",
+      category: "SHAPING",
+      tagline: "Handles, hilts, staff sections, gem settings — round stock, spun to shape.",
+      safety: [
+        "Stock must be secured in the chuck with no wobble before power-on — spin up slow and watch for runout in the first few seconds.",
+        "Keep tool rest close to the stock; the bigger the gap, the more leverage a catch has."
+      ],
+      settings: [
+        { k: "Softwood dowel", v: "Med-high speed" },
+        { k: "Hardwood / dense resin blank", v: "Med speed" }
+      ],
+      settingsNote: "Coming soon — full step-by-step for a sword hilt or staff section.",
+      projects: []
+    },
+    {
+      id: "table-sander",
+      name: "Table Sander",
+      category: "FINISHING",
+      tagline: "Smoothing 3D prints, resin parts, and foam bevels before paint.",
+      safety: [
+        "Keep fingers well clear of the belt/disc — sanders don't stop as fast as they look like they will.",
+        "Wear a dust mask — resin and filler dust is fine enough to inhale deep."
+      ],
+      settings: [
+        { k: "3D print seam smoothing", v: "Med speed, 220+ grit" },
+        { k: "Foam bevel edges", v: "Low speed, coarse grit first, then fine" }
+      ],
+      settingsNote: "",
+      projects: [
+        {
+          title: "Print Seam & Foam Bevel Cleanup",
+          materials: "3D-printed helmet halves · EVA foam armor pieces · assorted grits",
+          steps: [
+            { t: "Sand the print seam flat", d: "Work up through grits — coarse to knock down the ridge, fine to blend it invisible." },
+            { t: "Check under raking light", d: "Hold the part under a light at a low angle — any remaining seam shows as a shadow line." },
+            { t: "Bevel the foam edges", d: "Light, even pressure — foam sands away fast, so little passes beat one heavy one." }
+          ],
+          tip: "Prime the 3D print before your final sanding pass — primer highlights every flaw you missed with bare plastic."
+        }
+      ]
+    },
+    {
+      id: "hot-wire",
+      name: "Hot Wire Foam Cutter",
+      category: "COSPLAY CORE",
+      tagline: "The single most useful tool in the kit for EVA foam armor — clean, glue-ready bevels in one pass.",
+      safety: [
+        "The wire is hot enough to burn skin instantly — always know where your fingers are relative to the wire, not just the foam.",
+        "Cut in a ventilated space — hot foam gives off fumes you don't want to breathe in an enclosed room.",
+        "Let the wire cool before setting the tool down or changing bows."
+      ],
+      settings: [
+        { k: "2–4mm EVA foam", v: "Low heat, steady pace" },
+        { k: "6–10mm EVA foam", v: "Med heat, slower pace" }
+      ],
+      settingsNote: "Too hot + too slow chars and gives a rough black edge. Too cool + too fast drags and tears. You're aiming for a smooth push with light resistance.",
+      projects: [
+        {
+          title: "Beveled Armor Panel Set",
+          materials: "EVA foam sheet, pattern pieces marked out · straightedge for guided cuts",
+          steps: [
+            { t: "Practice on scrap first", d: "Dial in heat and speed on an offcut of the same foam thickness — every batch of foam cuts slightly differently." },
+            { t: "Cut straight panel edges against a guide", d: "A metal ruler or the tool's own edge guide keeps the cut from wandering." },
+            { t: "Angle the tool for beveled edges", d: "Tilt to your intended fold angle and pull steadily — this is what gives foam armor its clean mitred seams." },
+            { t: "Cut curves freehand, slowly", d: "Curves need a slower, more deliberate pace than straight cuts — rushing a curve is the most common cause of a ragged edge." },
+            { t: "Dry-fit the bevels before gluing", d: "Fold the panel along its cut lines and check the seam gap closes cleanly." }
+          ],
+          tip: "Cut your bevel angle a couple degrees steeper than the math says — contact cement compresses foam slightly at the seam, and a slightly-steep bevel closes up perfectly instead of leaving a gap."
+        }
+      ]
+    },
+    {
+      id: "rotary",
+      name: "Rotary Creator Tool",
+      category: "DETAIL",
+      tagline: "Dremel-style detail work — panel lines, engraving, polishing, small-scale sanding. Your 312-piece accessory set lives here.",
+      safety: [
+        "Secure small parts in a vise or with tape — rotary bits grab and spin loose parts violently.",
+        "Start every new bit at low speed to check for wobble before running it at working speed."
+      ],
+      settings: [
+        { k: "Engraving panel lines", v: "Low-med speed, engraving bit" },
+        { k: "Sanding drum detail work", v: "Low speed" },
+        { k: "Polishing resin gems", v: "Med speed, felt/polishing bit + compound" }
+      ],
+      settingsNote: "With the Perfect-Match-Controller Pro wired in, a foot pedal gives you hands-free speed control — genuinely useful here since both hands are usually busy steadying the part.",
+      projects: [
+        {
+          title: "Greeble Panel Lines & Gem Polishing",
+          materials: "Armor panel ready for detail · engraving bit · felt polishing bit + polishing compound · resin gem blanks",
+          steps: [
+            { t: "Lay out panel lines in pencil first", d: "Commit to the design on paper (or on the part) before the bit touches it — engraved lines are hard to undo." },
+            { t: "Engrave in light, repeated passes", d: "Multiple shallow passes give a cleaner, more consistent line than one deep gouge." },
+            { t: "Rough-shape the gem with a sanding bit", d: "Low speed, let the bit do the work rather than pressing hard." },
+            { t: "Polish with felt bit and compound", d: "Work up from a coarser to finer compound for a glass-like shine." }
+          ],
+          tip: "Keep a scrap of the same material next to the part — test every new bit or speed on the scrap first, especially before engraving the real piece."
+        }
+      ]
+    },
+    {
+      id: "airbrush",
+      name: "AirBrush",
+      category: "FINISHING",
+      tagline: "Base coats, shading, and weathering — where a prop stops looking like foam and starts looking like metal or worn paint.",
+      safety: [
+        "Spray in a ventilated area or with a spray booth/fan — paint particulate is not something to breathe regularly.",
+        "Wear a respirator rated for paint, not just a dust mask, for anything beyond quick touch-ups."
+      ],
+      settings: [
+        { k: "Base coat", v: "Wider fan, med distance, thin coats" },
+        { k: "Shading / weathering", v: "Narrow fan, close distance, light passes" }
+      ],
+      settingsNote: "",
+      projects: [
+        {
+          title: "Base Coat + Weathering Pass",
+          materials: "Primed foam or plastic armor piece · base color · a darker wash color for weathering",
+          steps: [
+            { t: "Seal foam with flexbond or a plastidip-style sealer first", d: "Raw foam soaks up paint unevenly and can crack when it flexes — seal before you spray." },
+            { t: "Lay down thin base coats", d: "Several thin passes beat one heavy one — heavy coats pool, drip, and take forever to dry on foam." },
+            { t: "Add panel shading", d: "Darker color in recesses and along panel lines, sprayed at a narrow angle so it settles into the crevice." },
+            { t: "Weather the high points", d: "Light dry-brush or a fine airbrush pass of a lighter tone on raised edges — this is what reads as 'worn metal' from a few feet away." }
+          ],
+          tip: "Test your full paint sequence — sealer, base, shade, weather — on a foam scrap first. Foam takes paint differently than the plastic and resin most airbrush tutorials assume."
+        }
+      ]
+    },
+    {
+      id: "angle-grinder",
+      name: "Angle Grinder",
+      category: "SHAPING",
+      tagline: "Heavier shaping and edge work — thicker foam, resin, or metal accent pieces.",
+      safety: [
+        "Full face shield, not just glasses — grinders throw debris at high speed and in unpredictable directions.",
+        "Secure the workpiece; never hand-hold small parts against a grinder."
+      ],
+      settings: [],
+      settingsNote: "Coming soon — full step-by-step for shaping a shield edge or metal accent piece.",
+      projects: []
+    },
+    {
+      id: "grip-recip",
+      name: "GRIP: Reciprocating Saw",
+      category: "HANDHELD",
+      tagline: "Freehand rough-cutting foam and plastic sheet stock away from the bench.",
+      safety: [
+        "Keep your off-hand well clear of the blade path — reciprocating blades move fast and unpredictably on soft material."
+      ],
+      settings: [],
+      settingsNote: "Coming soon.",
+      projects: []
+    },
+    {
+      id: "grip-chisel",
+      name: "GRIP: Powered Chisel",
+      category: "HANDHELD",
+      tagline: "Texturing and carving battle-damage detail into foam armor.",
+      safety: [
+        "Chisel away from your body and off-hand at all times."
+      ],
+      settings: [],
+      settingsNote: "Coming soon.",
+      projects: []
+    },
+    {
+      id: "grip-scissor",
+      name: "GRIP: Electric Scissor",
+      category: "HANDHELD",
+      tagline: "Fabric, Worbla, and thin craft foam — clean cuts where a blade would drag.",
+      safety: [
+        "Keep fingers clear of the blade's pinch point, same rule as manual scissors, just faster."
+      ],
+      settings: [],
+      settingsNote: "Coming soon.",
+      projects: []
+    }
+  ]
+};
+
+let state = {
+  active: "safety",
+  progress: {},
+  notes: {}
+};
+
+async function loadProgress() {
+  try {
+    const res = await window.storage.get('progress', false);
+    if (res && res.value) state.progress = JSON.parse(res.value);
+  } catch (e) { /* no saved progress yet */ }
+  try {
+    const res = await window.storage.get('notes', false);
+    if (res && res.value) state.notes = JSON.parse(res.value);
+  } catch (e) { /* no saved notes yet */ }
+}
+
+async function saveProgress() {
+  try { await window.storage.set('progress', JSON.stringify(state.progress), false); }
+  catch (e) { console.error('progress save failed', e); }
+}
+
+async function saveNotes(moduleId, text) {
+  state.notes[moduleId] = text;
+  try { await window.storage.set('notes', JSON.stringify(state.notes), false); }
+  catch (e) { console.error('notes save failed', e); }
+}
+
+function stepId(moduleId, projIdx, stepIdx) {
+  return moduleId + ':' + projIdx + ':' + stepIdx;
+}
+
+function moduleProgress(mod) {
+  let total = 0, done = 0;
+  mod.projects.forEach((p, pi) => {
+    p.steps.forEach((s, si) => {
+      total++;
+      if (state.progress[stepId(mod.id, pi, si)]) done++;
+    });
+  });
+  return { total, done };
+}
+
+function renderNav() {
+  const nav = document.getElementById('chipNav');
+  nav.innerHTML = '';
+  DATA.modules.forEach(mod => {
+    const { total, done } = moduleProgress(mod);
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.dataset.active = (mod.id === state.active);
+    chip.dataset.done = (total > 0 && done === total);
+    chip.innerHTML = '<span class="dot"></span>' + mod.name;
+    chip.onclick = () => { state.active = mod.id; render(); };
+    nav.appendChild(chip);
+  });
+}
+
+function renderModule(mod) {
+  const main = document.getElementById('main');
+  let html = '';
+  html += `<span class="tag">${mod.category}</span>`;
+  html += `<h2 class="title display">${mod.name}</h2>`;
+  html += `<p class="tagline">${mod.tagline}</p>`;
+
+  if (mod.projects.length) {
+    const { total, done } = moduleProgress(mod);
+    const pct = total ? Math.round((done/total)*100) : 0;
+    html += `<div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>`;
+    html += `<div class="progress-label">${done} / ${total} steps checked off</div>`;
+  }
+
+  if (mod.safety && mod.safety.length) {
+    html += `<section class="block safety"><h3>⚠ Safety Notes</h3><ul>`;
+    mod.safety.forEach(s => html += `<li>${s}</li>`);
+    html += `</ul></section>`;
+  }
+
+  if (mod.settings && mod.settings.length) {
+    html += `<section class="block"><h3>Settings — Starting Points</h3><div class="settings-grid">`;
+    mod.settings.forEach(s => {
+      html += `<div class="setting"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`;
+    });
+    html += `</div>`;
+    if (mod.settingsNote) html += `<div class="settings-note">${mod.settingsNote}</div>`;
+    html += `</section>`;
+  }
+
+  if (mod.projects.length) {
+    mod.projects.forEach((proj, pi) => {
+      html += `<div class="project"><div class="project-head"><h4>${proj.title}</h4></div><div class="project-body">`;
+      html += `<div class="materials"><b>Materials:</b> ${proj.materials}</div>`;
+      proj.steps.forEach((s, si) => {
+        const id = stepId(mod.id, pi, si);
+        const checked = !!state.progress[id];
+        html += `<div class="step ${checked ? 'checked':''}">`;
+        html += `<input type="checkbox" data-stepid="${id}" ${checked ? 'checked':''}>`;
+        html += `<div class="step-num">${String(si+1).padStart(2,'0')}</div>`;
+        html += `<div class="step-text"><div class="st-title">${s.t}</div><div class="st-detail">${s.d}</div></div>`;
+        html += `</div>`;
+      });
+      html += `<div class="tip"><b>Tip:</b> ${proj.tip}</div>`;
+      html += `</div></div>`;
+    });
+  } else if (mod.id !== 'safety') {
+    html += `<div class="placeholder"><b>No project logged yet</b>Tell Claude what you tried on this module and it'll get added here next time.</div>`;
+  }
+
+  if (mod.note === 'materialGuide') {
+    html += `<section class="block"><h3>Quick Material Notes</h3><ul>
+      <li><b>EVA foam</b> — gums up blades/bits at high speed; go slower than you think.</li>
+      <li><b>Acrylic</b> — cracks under rushed cuts; let the tool cut, don't force feed.</li>
+      <li><b>Worbla / thermoplastics</b> — heat-formed by hand, not cut by these tools; save the powered modules for rigid backers.</li>
+    </ul></section>`;
+  }
+
+  html += `<section class="block"><h3>Build Notes</h3>
+    <textarea class="notes" id="notesBox" placeholder="Jot anything worth remembering for next time — a setting that worked, a mistake to avoid...">${state.notes[mod.id] || ''}</textarea>
+    <div class="save-state" id="saveState"></div>
+  </section>`;
+
+  main.innerHTML = html;
+
+  main.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', async (e) => {
+      state.progress[e.target.dataset.stepid] = e.target.checked;
+      await saveProgress();
+      render();
+    });
+  });
+
+  const notesBox = document.getElementById('notesBox');
+  let saveTimer;
+  notesBox.addEventListener('input', (e) => {
+    clearTimeout(saveTimer);
+    document.getElementById('saveState').textContent = 'Saving…';
+    saveTimer = setTimeout(async () => {
+      await saveNotes(mod.id, e.target.value);
+      document.getElementById('saveState').textContent = 'Saved';
+      setTimeout(() => { const el = document.getElementById('saveState'); if (el) el.textContent=''; }, 1500);
+    }, 600);
+  });
+}
+
+function render() {
+  renderNav();
+  const mod = DATA.modules.find(m => m.id === state.active);
+  renderModule(mod);
+}
+
+(async () => {
+  await loadProgress();
+  render();
+})();
+</script>
+</body>
+</html>
